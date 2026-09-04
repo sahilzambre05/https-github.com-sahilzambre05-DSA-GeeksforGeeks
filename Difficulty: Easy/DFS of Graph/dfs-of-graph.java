@@ -1,20 +1,26 @@
 class Solution {
     public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj) {
         // code here
-        int V = adj.size();
-        boolean[] visited = new boolean[V];
         ArrayList<Integer> res = new ArrayList<>();
-        dfs(0,visited,adj,res);
+        int n = adj.size();
+        boolean[] visited = new boolean[n];
+        for(int i=0;i<n;i++){
+            if(!visited[i]){
+                dfs(i,adj,visited,res);
+            }
+        }
         return res;
     }
     
-    public void dfs(int src,boolean[] visited,ArrayList<ArrayList<Integer>> adj,ArrayList<Integer> res){
+    public void dfs(int src,ArrayList<ArrayList<Integer>> adj,boolean[] visited,ArrayList<Integer> res){
         visited[src] = true;
         res.add(src);
-        for(int neighbour : adj.get(src)){
-            if(!visited[neighbour]){
-                dfs(neighbour,visited,adj,res);
+        
+        for(int node : adj.get(src)){
+            if(!visited[node]){
+                dfs(node,adj,visited,res);
             }
         }
+        return;
     }
 }
